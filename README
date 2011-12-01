@@ -1,0 +1,1 @@
+the idea is to create an envinroment where it is possible to test url visit possible no distribruted crawlers. It must be able to set differente number of pages on the simulated internet, to be visited by a diferent number of crawlers, using an specific function that determines the visit link policy.
