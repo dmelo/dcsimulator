@@ -1,11 +1,16 @@
 #ifndef CNETWORK_H
 #define CNETWORK_H
 
-class CNetwork {
-    int *network;
 
-    CNetwork(int size);
-    ~CNetwork();
+class CNetwork {
+    private:
+        set<int> **network;
+        int size;
+
+    public:
+        CNetwork(int size);
+        ~CNetwork();
+
 };
 
 #endif
