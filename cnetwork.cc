@@ -2,18 +2,23 @@
 #include"cnetwork.h"
 
 CNetwork::CNetwork(int size) {
-    this->size = size;
-    network = (set<int> **) calloc(size, sizeof(set<int> *));
-
-    for(int i = 0; i < size; i++)
-        network[i] = new set<int>;
-
-
+    srand(time(NULL));
+    matrix = new Matrix(size);
 }
 
 CNetwork::~CNetwork() {
-    for(int i = 0; i < size; i++)
-        free(network[i]);
-    free(network);
+    delete matrix;
 }
 
+void CNetwork::initBAModel() {
+    matrix->setLink(0, 1);
+    matrix->setLink(1, 0);
+    for(int i = 2; i < matrix->getSize(); i++) {
+        int r = rand() % 5;
+        for(int j = 0; j < r; j++) {
+            int c = matrix->getRandomByPriotiyBLink();
+            matrix->setLink(i, c);
+            printf("setLink(%d, %d)\n", i, c);
+        }
+    }
+}

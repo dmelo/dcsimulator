@@ -1,16 +1,18 @@
 #ifndef CNETWORK_H
 #define CNETWORK_H
 
+#include"matrix.h"
+
 
 class CNetwork {
     private:
-        set<int> **network;
-        int size;
+       Matrix *matrix; 
 
     public:
         CNetwork(int size);
         ~CNetwork();
 
+        void initBAModel();
 };
 
 #endif

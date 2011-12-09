@@ -5,7 +5,10 @@
 
 
 int main(int argc, char **argv) {
-    CNetwork *cnet = new CNetwork(10);
+    CNetwork *cnet = new CNetwork(100000);
+    cnet->initBAModel();
+
+    delete cnet;
 
     return 0;
 }
