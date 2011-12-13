@@ -1,21 +1,24 @@
 CFLAGS=-g
+BIN=bin
+LIB=lib
+SRC=src
 
-all: cnet
+all: ${BIN}/cnet
 
-cnet: main.cc cnetwork.o timer.o log.o
-	g++ ${CFLAGS} main.cc cnetwork.o matrix.o timer.o log.o -o cnet
+${BIN}/cnet: ${SRC}/main.cc ${LIB}/cnetwork.o ${LIB}/timer.o ${LIB}/log.o
+	g++ ${CFLAGS} ${SRC}/main.cc ${LIB}/cnetwork.o ${LIB}/matrix.o ${LIB}/timer.o ${LIB}/log.o -o ${BIN}/cnet
 
-cnetwork.o: cnetwork.cc cnetwork.h matrix.o
-	g++ ${CFLAGS} -c cnetwork.cc
+${LIB}/cnetwork.o: ${SRC}/cnetwork.cc ${SRC}/cnetwork.h ${LIB}/matrix.o
+	g++ ${CFLAGS} -c ${SRC}/cnetwork.cc -o ${LIB}/cnetwork.o
 
-matrix.o: matrix.cc matrix.h
-	g++ ${CFLAGS} -c matrix.cc
+${LIB}/matrix.o: ${SRC}/matrix.cc ${SRC}/matrix.h
+	g++ ${CFLAGS} -c ${SRC}/matrix.cc -o ${LIB}/matrix.o
 
-timer.o: timer.cc timer.h
-	g++ ${CFLAGS} -c timer.cc
+${LIB}/timer.o: ${SRC}/timer.cc ${SRC}/timer.h
+	g++ ${CFLAGS} -c ${SRC}/timer.cc -o ${LIB}/timer.o
 
-log.o: log.cc log.h
-	g++ ${CFLAGS} -c log.cc
+${LIB}/log.o: ${SRC}/log.cc ${SRC}/log.h
+	g++ ${CFLAGS} -c ${SRC}/log.cc -o ${LIB}/log.o
 
 clean:
-	rm *.o cnet
+	rm ${LIB}/* ${BIN}/*
