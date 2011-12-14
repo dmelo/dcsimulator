@@ -14,6 +14,7 @@ FILE *Log::fd = NULL;
 
 Log::Log(char *text, int logLevel) {
     if(logLevel <= Log::logLevel) {
+        sprintf(text, "%s\n", text);
         if(fd) 
             fprintf(fd, text);
         else

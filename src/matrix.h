@@ -14,6 +14,7 @@ class Matrix {
         int size; // maximum number of pages.
         set<int> **link; // link to the next page -- points to.
         set<int> **blink; // back link -- is pointed by.
+        char text[4096];
 
     public:
         Matrix(int size);
@@ -25,6 +26,8 @@ class Matrix {
         int countBLink(int x);
         int getRandomByPriotiyBLink();
         int getSize();
+        int *nodesBCountRelation();
+        void exportNodesBCountRelation(FILE *fd);
 };
 
 #endif

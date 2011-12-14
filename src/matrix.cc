@@ -1,4 +1,5 @@
 #include"matrix.h"
+#include"log.h"
 
 Matrix::Matrix(int size) {
     this->size = size;
@@ -46,25 +47,36 @@ int Matrix::countLink(int x) {
 }
 
 int Matrix::countBLink(int x) {
-    printf("countBLink(%d): %d -- ", x, blink[x]->size());
-    for(set<int>::iterator it = blink[x]->begin(); it != blink[x]->end(); it++)
-        printf(" %d", *it);
-    printf("\n");
     return blink[x]->size();
 }
 
 int Matrix::getRandomByPriotiyBLink() {
     int r = (rand() + 1) % total, i = 0;
-    printf("r: %d. total: %d\n", r, total);
+    sprintf(text, "r: %d. total: %d\n", r, total);
     for(; r > 0; i++) {
         r -= this->countBLink(i);
     }
 
-    printf("%d\n\n", i);
+    sprintf(text, "%s%d\n", text, i);
+    Log(text, 5);
 
     return i;
 }
 
 int Matrix::getSize() {
     return size;
+}
+
+int *Matrix::nodesBCountRelation() {
+    int* relation = (int *) calloc(size, sizeof(int));
+    for(int i = 0; i < size; i++)
+        relation[countBLink(i)]++;
+
+    return relation;
+}
+
+void Matrix::exportNodesBCountRelation(FILE *fd) {
+    int *relation = nodesBCountRelation();
+    for(int i = 0; i < size; i++)
+        fprintf(fd, "%d %d\n", i, relation[i]);
 }
